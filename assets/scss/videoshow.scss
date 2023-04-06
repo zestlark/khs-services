@@ -1,0 +1,100 @@
+#videoshow {
+    .videoshow-box {
+
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        margin-bottom: 100px;
+
+        video {
+            width: 400px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        }
+
+        .player {
+            position: absolute;
+            background: $primary-color;
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            bottom: -25px;
+            transition: 0.5s all;
+
+            &::after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                background: $primary-color;
+                opacity: 25%;
+                z-index: 1;
+                border-radius: 50%;
+                transition: 0.5s all;
+
+            }
+
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 90px;
+                height: 90px;
+                background: $primary-color;
+                opacity: 30%;
+                z-index: 1;
+                border-radius: 50%;
+                transition: 0.5s all;
+            }
+
+            i.pause {
+                display: none;
+            }
+
+            i.play {
+                display: block;
+            }
+        }
+
+        &.play {
+            .player {
+
+                opacity: 50%;
+
+                &::after {
+                    opacity: 0;
+                }
+
+                &::before {
+                    opacity: 0;
+                }
+
+                i.pause {
+                    display: block;
+                }
+
+                i.play {
+                    display: none;
+                }
+            }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #videoshow {
+        .videoshow-box {
+            video {
+                width: 90%;
+                margin: 0;
+            }
+        }
+    }
+}

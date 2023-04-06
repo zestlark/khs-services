@@ -1,0 +1,16 @@
+#clients {
+    a {
+        margin-right: 50px;
+
+        img {
+            width: 100px;
+            filter: saturate(0);
+            opacity: 0.5;
+
+            &:hover {
+                filter: saturate(1);
+                opacity: 1;
+            }
+        }
+    }
+}

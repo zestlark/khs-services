@@ -1,0 +1,13 @@
+<div id="clients" class="webpage_section">
+    <div class="heading" data-aos="fade-up">client</div>
+    <marquee behavior="" direction="">
+
+        <?php
+        $clientdatapah = "./public/clients/";
+                include('./php/clients.obj.php');
+                foreach ($clientrawarray as $filename) {
+                    echo '<a data-aos="fade-up"><img src="./public/clients/'.$filename.'" alt=""></a>';
+                }
+                ?>
+    </marquee>
+</div>

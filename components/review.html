@@ -1,0 +1,50 @@
+<?php $reviewdatapah = './database/review/log/'; ?>
+<?php include('./php/reviews.obj.php'); ?>
+
+<div id="review" class="webpage_section">
+    <div class="container">
+        <div class="heading" data-aos="fade-up">review</div>
+
+        <div class="review-box">
+            <?php
+            $review_count = 0;
+                foreach($reviews as $i => $iV) {
+
+                    if($review_count > 2){
+                        break;
+                    }else{
+                        $review_count++;
+                    }
+
+                    echo '<div class="box" data-aos="fade-up">
+                        <div class="stars" data-rating="'.$iV->rating.'" data-aos="fade-up">
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                            <i class="ri-star-fill"></i>
+                        </div>
+        
+                        <h3>'.$iV->title.'</h3>
+        
+                        <p>'.$iV->description.'</p>
+        
+                        <p><small>by - </small> <i>'.$iV->by.'</i></p>
+                    </div>';
+                }
+                ?>
+        </div>
+
+
+        <div class="btn-box" data-aos="fade-up">
+            <button onclick=" gotohref('./review') ">view all reviews</button>
+            <button onclick=" gotohref('./review/new.html') ">give a review</button>
+        </div>
+
+    </div>
+</div>
+<script>
+    function gotohref(url) {
+        window.location.href = url;
+    }
+</script>

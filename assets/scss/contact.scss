@@ -1,0 +1,109 @@
+#contact {
+    background: linear-gradient(45deg,#92b5f2, #8ae3f5);
+    margin-top: 60px;
+
+    .footer {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 20px;
+        padding: 10px;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #92b5f233;
+            padding: 10px;
+            border-radius: 10px;
+            width: 60%;
+
+            input,
+            textarea,
+            button {
+                width: 100%;
+                padding: 10px;
+                border-radius: 5px;
+                background: transparent;
+                border: 1px solid $primary-color;
+                color: black;
+            }
+
+            textarea {
+                height: 150px;
+                resize: none;
+            }
+
+            button {
+                background: $primary-color;
+                color: white;
+            }
+        }
+
+        img {
+            width: 150px;
+            margin: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+
+            h3 {
+                font-size: 16px;
+                text-transform: capitalize;
+                font-weight: 600;
+            }
+
+            li {
+                margin-bottom: 20px;
+                max-width: 200px;
+            }
+        }
+    }
+
+    .footer.two {
+        align-items: flex-start;
+
+        ul {
+            .social {
+
+                a {
+                    font-size: 22px;
+                    opacity: 50%;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #contact {
+        .footer.two {
+            flex-direction: column;
+            gap: 40px;
+
+            form {
+                width: 100%;
+            }
+
+            ul {
+                text-align: center;
+                width: 100%;
+
+                li {
+                    max-width: 300px;
+                    margin: 0 auto;
+                    margin-bottom: 30px;
+                    margin-top: 10px;
+                    text-align: center;
+                }
+
+            }
+        }
+    }
+}

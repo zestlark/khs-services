@@ -1,0 +1,22 @@
+<div id="services" class="webpage_section">
+    <div class="container">
+        <div class="heading" data-aos="fade-up">services</div>
+        <div class="services-box" data-aos="fade-up">
+            <p><?php echo $services_paragraph; ?>
+            </p>
+            <div class="collection">
+
+                <?php
+                foreach($services as $i => $iV) {
+                    echo '<div class="box" data-aos="fade-up">
+                        <span><img src="'.$iV->img.'" alt=""></span>
+                        <p>'.$iV->name.'</p>
+                        <a href="'.$iV->link.'"><i class="ri-arrow-right-s-line"></i></a>
+                      </div>';
+                }
+                ?>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+#clients a {
+  margin-right: 50px;
+}
+#clients a img {
+  width: 100px;
+  filter: saturate(0);
+  opacity: 0.5;
+}
+#clients a img:hover {
+  filter: saturate(1);
+  opacity: 1;
+}/*# sourceMappingURL=clients.css.map */

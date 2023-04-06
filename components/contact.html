@@ -1,0 +1,37 @@
+<div id="contact" class="webpage_section">
+    <div class="container">
+        <div class="heading" data-aos="fade-up">contact</div>
+
+        <div class="footer">
+            <img src="./favicon.ico" alt="" data-aos="fade-up">
+            <p data-aos="fade-up"><?php echo $contact_paragraph; ?></p>
+        </div>
+
+        <div class="footer two">
+
+            <form data-aos="fade-up" id="contactform">
+                <input type="text" placeholder="Email" id="contactformemail">
+                <textarea placeholder="Message" name="" id="contactformmessage" cols="30" rows="10"></textarea>
+                <button type="submit">submit</button>
+            </form>
+
+            <ul class="info" data-aos="fade-up">
+                <h3>Email</h3>
+                <li><?php echo $contact_email; ?></li>
+                <h3>phone</h3>
+                <li><?php echo $contact_mobile; ?></li>
+                <h3>address</h3>
+                <li><?php echo $contact_address; ?></li>
+                <h3>social</h3>
+                <li class="social">
+                    <a href="<?php echo $contact_social_instagram; ?>"><i class="ri-instagram-line"></i></a>
+                    <a href="<?php echo $contact_social_facebook; ?>"><i class="ri-facebook-line"></i></a>
+                    <a href="<?php echo $contact_social_twitter; ?>"><i class="ri-twitter-line"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    window.adminemail = "<?php echo $contact_email; ?>";
+</script>

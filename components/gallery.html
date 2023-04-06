@@ -1,0 +1,21 @@
+<div id="gallery" class="webpage_section">
+  <div class="container">
+    <div class="heading" data-aos="fade-up">Gallery</div>
+    <div id="photos">
+      <?php 
+            for($i= 0 ; $i < $galleryimages_count ; $i++) { 
+            echo '<img onclick="galleryimageopen(\'./public/gallery/'.$galleryimages[$i].'\')" data-aos="fade-up" src="./public/gallery/'.$galleryimages[$i].'" alt="">';
+            }
+      ?>
+    </div>
+
+    <?php
+        if(count($galleryimages) > 20){
+          echo '        
+          <div class="btn-box" data-aos="fade-up">
+            <button><a href="./gallery">view all photos</a></button>
+          </div>';
+        }
+        ?>
+  </div>
+</div>
