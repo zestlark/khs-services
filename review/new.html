@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- remix icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- aos library -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+    <link rel="stylesheet" href="../assets/style.css">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>Review</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap');
+
+    * {
+        box-sizing: border-box;
+        font-family: 'Nunito Sans', sans-serif;
+    }
+
+    body {
+        max-width: 100vw;
+        padding: 0;
+        margin: 0;
+        height: 100vh;
+        background: #042cc333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .button {
+        width: 140px;
+        cursor: pointer;
+        padding: 1em;
+        border-radius: 0.2em;
+        border: none;
+        color: white;
+        font-size: 1em;
+        transition: all 0.5s ease;
+        background-color: #042cc3;
+    }
+
+    .button:hover {
+        background-color: #ff4f05;
+    }
+
+    .button.disabled {
+        opacity: 0.5;
+    }
+
+    .button.disabled:hover {
+        background-color: #042cc3;
+    }
+
+    .form {
+        width: 360px;
+        margin: 0;
+        padding: 20px;
+        padding-top: 20px;
+        background-color: white;
+        color: #33312e;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    }
+
+    .form .progress-bar {
+        width: 100%;
+        list-style-type: none;
+        display: flex;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .form .progress-bar li.progress-bar__dot {
+        display: block;
+        width: 30px;
+        color: black;
+        font-weight: bold;
+        border-radius: 50%;
+        height: 30px;
+        border: 0.2em solid #042cc3;
+        background-color: white;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        font-size: 16px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form .progress-bar li.progress-bar__dot.full {
+        background-color: #042cc3;
+        color: white;
+    }
+
+    .form .progress-bar li.progress-bar__connector {
+        display: block;
+        width: calc(100% / 3);
+        border-radius: 1000em;
+        height: 2px;
+        background-color: #042cc3;
+    }
+
+    .form label {
+        font-size: 18px;
+    }
+
+    .form input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 30px;
+        box-sizing: border-box;
+        margin-top: 10px;
+        border: none;
+        border-radius: 10px;
+        background-color: #e6e6e6;
+        font-size: 1em;
+    }
+
+    .form input:focus {
+        border: none;
+    }
+
+    .form .button-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .form button#validate {
+        margin: auto;
+        background-color: #1a936f;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .form button#validate:hover {
+        background-color: #12684e;
+    }
+
+    @media only screen and (max-width: 400px) {
+        .form {
+            width: 95%;
+        }
+    }
+
+    .review-box.box {
+        width: 100%;
+        text-align: center;
+        padding: 20px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 15px;
+        flex: 1 1 auto;
+        border-radius: 5px;
+    }
+
+    .review-box.box .stars {
+        font-size: 40px;
+        background: linear-gradient(to right, gold, rgb(181, 181, 181) 0%);
+        width: 100%;
+        display: flex;
+        transition: all 1s;
+        align-items: center;
+        justify-content: space-around;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .review-box.box .stars[data-rating="0"] {
+        background: linear-gradient(to right, gold 0%, rgb(181, 181, 181) 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .review-box.box .stars[data-rating="1"] {
+        background: linear-gradient(to right, gold 20%, rgb(181, 181, 181) 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .review-box.box .stars[data-rating="2"] {
+        background: linear-gradient(to right, gold 40%, rgb(181, 181, 181) 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .review-box.box .stars[data-rating="3"] {
+        background: linear-gradient(to right, gold 60%, rgb(181, 181, 181) 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .review-box.box .stars[data-rating="4"] {
+        background: linear-gradient(to right, gold 80%, rgb(181, 181, 181) 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .review-box.box .stars[data-rating="5"] {
+        background: linear-gradient(to right, gold 100%, rgb(181, 181, 181) 0%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+
+<body>
+    <div id="stepByStepForm" class="form">
+        <ul class="progress-bar">
+            <li class="progress-bar__dot full">1</li>
+            <li class="progress-bar__connector"></li>
+            <li class="progress-bar__dot">2</li>
+            <li class="progress-bar__connector"></li>
+            <li class="progress-bar__dot">3</li>
+        </ul>
+
+        <div class="step step1">
+            <div class="input-group">
+                <label for="firstname">Name</label>
+                <input id="form_name" type="text" placeholder="full name" name="firstname" id="firstname">
+            </div>
+            <div class="input-group">
+                <label for="mail">E-mail</label>
+                <input id="form_email" type="mail" placeholder="example@gmail.com" name="mail" id="mail">
+            </div>
+        </div>
+
+        <div class="step step2 hidden">
+            <div class="input-group">
+                <label for="address">Heading</label>
+                <input id="form_heading" type="text" placeholder="Best service" name="address" id="address">
+            </div>
+            <div class="input-group">
+                <label for="country">Message</label>
+                <input id="form_message" type="text" placeholder="We loved the work done by KHS services" name="country"
+                    id="country">
+            </div>
+            <div class="input-group">
+                <label for="country">Rate us</label>
+                <div class="box review-box">
+                    <div id="stars" class="stars" data-rating="0">
+                        <i onclick="stars(1)" class="ri-star-fill"></i>
+                        <i onclick="stars(2)" class="ri-star-fill"></i>
+                        <i onclick="stars(3)" class="ri-star-fill"></i>
+                        <i onclick="stars(4)" class="ri-star-fill"></i>
+                        <i onclick="stars(5)" class="ri-star-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="step step3 hidden">
+            <div class="input-group">
+                <label for="mail">OTP</label>
+                <input id="form_otp" type="mail" placeholder="0 0 0 0" name="mail" id="mail">
+                <u onclick="resendmail()" style="color: blue;">Resend OTP</u>
+                <br>
+                <br>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button id="previous" class="disabled button" disabled>
+                previous
+            </button>
+            <button id="next" class="button">
+                next
+            </button>
+        </div>
+        <div class="button-group">
+            <button id="validate" class="hidden button">
+                Submit
+            </button>
+        </div>
+
+    </div>
+</body>
+<script>
+    let pagereload = sessionStorage.getItem('reload');
+    if (pagereload == 'true') {
+        sessionStorage.setItem('reload', 'false');
+        window.location.href = "./index.php";
+    }
+
+    const previousButton = document.getElementById("previous")
+    const nextButton = document.getElementById("next")
+    const submitButton = document.getElementById('validate')
+    const form = document.getElementById('stepByStepForm')
+    const dots = document.getElementsByClassName('progress-bar__dot')
+    const numberOfSteps = 3
+    let currentStep = 1
+    let mail = 'false';
+    let otp = 0000
+
+    for (let i = 0; i < dots.length; ++i) {
+        dots[i].addEventListener('click', () => {
+            goToStep(i + 1)
+        })
+    }
+
+    previousButton.onclick = goPrevious
+    nextButton.onclick = goNext
+
+
+    function goNext(e) {
+        e.preventDefault()
+        currentStep += 1
+        goToStep(currentStep)
+    }
+
+    function goPrevious(e) {
+        e.preventDefault()
+        currentStep -= 1
+        goToStep(currentStep)
+    }
+
+    function goToStep(stepNumber) {
+        currentStep = stepNumber
+
+        let inputsToHide = document.getElementsByClassName('step')
+        let inputs = document.getElementsByClassName(`step${currentStep}`)
+        let indicators = document.getElementsByClassName('progress-bar__dot')
+
+        for (let i = indicators.length - 1; i >= currentStep; --i) {
+            indicators[i].classList.remove('full')
+        }
+
+        for (let i = 0; i < currentStep; ++i) {
+            indicators[i].classList.add('full')
+        }
+
+        //hide all input
+        for (let i = 0; i < inputsToHide.length; ++i) {
+            hide(inputsToHide[i])
+        }
+
+        //only show the right one
+        for (let i = 0; i < inputs.length; ++i) {
+            show(inputs[i])
+        }
+
+        //if we reached final step
+        if (currentStep === numberOfSteps) {
+            enable(previousButton)
+            disable(nextButton)
+            show(submitButton)
+            if (mail != 'true') {
+                sendmail()
+            }
+        }
+
+        //else if first step
+        else if (currentStep === 1) {
+            disable(previousButton)
+            enable(next)
+            hide(submitButton)
+        }
+
+        else {
+            enable(previousButton)
+            enable(next)
+            hide(submitButton)
+        }
+    }
+
+    function enable(elem) {
+        elem.classList.remove("disabled");
+        elem.disabled = false;
+    }
+
+    function disable(elem) {
+        elem.classList.add("disabled");
+        elem.disabled = true;
+    }
+
+    function show(elem) {
+        elem.classList.remove('hidden')
+    }
+
+    function hide(elem) {
+        elem.classList.add('hidden')
+    }
+
+    function stars(value) {
+        document.getElementById('stars').dataset.rating = value
+    }
+
+    validate.onclick = function () {
+        let u_form_name = form_name.value;
+        let u_form_email = form_email.value;
+        let u_form_heading = form_heading.value;
+        let u_form_message = form_message.value;
+        let u_form_stars = document.getElementById('stars').dataset.rating;
+        let alldata = {
+            "name": u_form_name,
+            "email": u_form_email,
+            "heading": u_form_heading,
+            "message": u_form_message,
+            "stars": u_form_stars
+        }
+        if (u_form_name != ''
+            && u_form_email != ''
+            && u_form_heading != ''
+            && u_form_message != ''
+            && u_form_stars != ''
+        ) {
+            if (form_otp.value == otp) {
+                let form_data = new FormData();
+                form_data.append("name", alldata.name);
+                form_data.append("email", alldata.email);
+                form_data.append("heading", alldata.heading);
+                form_data.append("message", alldata.message);
+                form_data.append("stars", alldata.stars);
+
+                fetch("../php/review.php", {
+                    body: form_data,
+                    method: "post",
+                }).then(function (response) {
+                    response.text().then(function (text) {
+                        if (text == 'true') {
+                            alert("your review is added successfully");
+                            sessionStorage.setItem('reload', 'true');
+                        }
+                    });
+                });
+
+            } else {
+                alert('wrong otp')
+            }
+        } else {
+            alert('please enter your all details')
+        }
+    }
+
+    function generateOTP() {
+        let digits = '0123456789';
+        let OTP = '';
+        for (let i = 0; i < 4; i++) {
+            OTP += digits[Math.floor(Math.random() * 10)];
+        }
+        otp = OTP
+    }
+
+    function resendmail() {
+        if (confirm('New otp will be send to you')) {
+            sendmail()
+        }
+    }
+
+    function sendmail() {
+        generateOTP()
+        url = `http://test-be01.000webhostapp.com/email/?to=${form_email.value}&message=your otp is ${otp}&subject=KHS services (please do not share your otp)&from=KHS services`
+        fetch(url, { mode: "no-cors" }).then(function (response) {
+            response.text().then(function (text) {
+                mail = 'true'
+            });
+        });
+
+        //http://test-be01.000webhostapp.com/email/?to=kanojiyadeepak747@gmail.com&message=testing&subject=testing&from=deepak
+    }
+</script>
+
+</html>
